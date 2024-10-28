@@ -5,7 +5,7 @@
 </div>
 
 <p align="center">
-   <img src="http://img.shields.io/static/v1?label=STATUS&message=Por%20Mejorar&color=LIGHTBLUE&style=for-the-badge" />
+   <img src="http://img.shields.io/static/v1?label=STATUS&message=Terminado&color=LIGHTBLUE&style=for-the-badge" />
    <img src="https://img.shields.io/badge/language-Java-007396?style=for-the-badge"/>
 </p>
 
@@ -15,9 +15,9 @@
 
 AnimeSearch ofrece varias funcionalidades para ayudarte a descubrir y conocer más sobre tus animes favoritos:
 
-1. **Top 10 Animes**: Muestra el top 10 de animes en MyAnimeList.
-2. **Animes de la Temporada Actual**: Presenta los animes de la temporada en curso.
-3. **Búsqueda de Anime**: Permite buscar un anime específico y obtener información detallada, incluyendo el episodio mejor calificado.
+1. **Búsqueda de Anime**: Permite buscar un anime específico y obtener información detallada, incluyendo el episodio mejor calificado.
+2. **Top 10 Animes**: Muestra el top 10 de animes en MyAnimeList.
+3. **Animes de la Temporada Actual**: Presenta los animes de la temporada en curso.
 
 ## 🔧 Tecnologías Utilizadas
 
