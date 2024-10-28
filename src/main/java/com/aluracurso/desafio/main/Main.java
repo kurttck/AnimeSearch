@@ -21,10 +21,45 @@ public class Main {
     private DataConvert convert = new DataConvert();
 
     public void Menu() throws UnsupportedEncodingException {
+        String menu = """
+                
+                ******** Menú *********
+                1.Anime Search
+                2.Top 10 Animes de MyAnimeList
+                3.Animes de la Temporada en curso
+                4.Salir
+                
+                """;
+
+        int option = 0;
 
         System.out.println(" ****** BIENVENIDO A ANIME SEARCH ****** \n");
+        do {
+            System.out.println(menu);
+            System.out.println("\nEscribe la opción deseada:");
+            option = scan.nextInt();
+            switch (option) {
+                case 1:
+                    animeSearch();
+                    break;
+                case 2:
+                    showTopTen();
+                    break;
+                case 3:
+                    showAnimeTemporade();
+                    break;
+                case 4:
+                    System.out.println("saliendo...");
+                    break;
+                default:
+                    System.out.println("opcion invalida");
+            }
+        } while (option != 4);
 
 
+    }
+
+    private void showTopTen() {
         //MUESTRA EL TOP 10 ANIMES ACTUALMENTE
         System.out.println(" **** Top 10 animes ****");
         var jsonTop = apiConsume.getData("https://api.jikan.moe/v4/top/anime?sfw");
@@ -35,30 +70,33 @@ public class Main {
             System.out.println(count + ". " + a.title() + " (" + a.type() + ") | Score: " + a.score());
             count++;
         }
+    }
 
-
+    private void showAnimeTemporade() {
         //MUESTRA TODOS LOS ANIMES DE LA TEMPORADA ACTUAL
         System.out.println("\n **** Animes de esta Temporada ****");
         var jsonTemp = apiConsume.getData("https://api.jikan.moe/v4/seasons/now?sfw");
 
-        count = 1;
+        int count = 1;
         DataAnime dataTemp = convert.convert(jsonTemp, DataAnime.class);
         for (var a : dataTemp.animeList().stream().toList()) {
             System.out.println(count + ". " + a.title());
             count++;
         }
+    }
 
+    private void animeSearch() throws UnsupportedEncodingException {
 
         // BUSQUEDA DE ANIME POR TITULO TIPO TV
-
         String animeTitle = "";
-
+        scan.nextLine();
         do {
-            System.out.println("\nEscribe el anime que deseas buscar o Salir para terminar el programa.");
+            System.out.println("\nEscribe el anime que deseas buscar o salir para volver al menú.");
+
             animeTitle = scan.nextLine().trim();
 
             if (animeTitle.toUpperCase().equals("SALIR")) {
-                System.out.println("Saliendo del programa...");
+                System.out.println("Volviendo al menú...");
                 break;
             }
 
@@ -91,6 +129,7 @@ public class Main {
                 System.out.println("\n ** Capitulo mejor calificado ** ");
 
                 Optional<Episode> bestEpisode = dataEpisodes.episodeList().stream()
+                        .filter(e -> e.score() != null)
                         .filter(e -> e.score() > 0.0)
                         .max(Comparator.comparing(Episode::score));
 
@@ -119,7 +158,5 @@ public class Main {
             }
 
         } while (true);
-
-
     }
 }
